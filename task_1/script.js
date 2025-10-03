@@ -67,8 +67,8 @@ function updateSummary() {
     const tax = parseFloat(row.cells[5].querySelector("input").value) || 0;
 
     if (rate > 0 && qty > 0) {
-      totalQuantity ++;
-      totalProducts+= qty;
+      totalQuantity++;
+      totalProducts += qty;
 
       let price = rate * qty;
       let afterDiscount = price - (price * (discount / 100));
@@ -80,7 +80,8 @@ function updateSummary() {
   });
 
   const totalAmount = subtotal + totalTax;
-  const roundOff = Math.round(totalAmount);
+  const roundedTotal = Math.round(totalAmount);
+  const roundOff = +(roundedTotal - totalAmount).toFixed(2); 
 
   const cgst = totalTax / 2;
   const sgst = totalTax / 2;
@@ -89,8 +90,9 @@ function updateSummary() {
   document.getElementById("afterDiscount").textContent = subtotal.toFixed(2);
   document.getElementById("cgst").textContent = cgst.toFixed(2);
   document.getElementById("sgst").textContent = sgst.toFixed(2);
-  document.getElementById("totalAmount").textContent = totalAmount.toFixed(2);
-  document.getElementById("finalAmount").textContent = roundOff.toFixed(2);
+  document.getElementById("totalAmount").textContent = totalAmount.toFixed(0);
+  document.getElementById("finalAmount").textContent = roundOff.toFixed(2); 
 }
+
 
 addRow();
